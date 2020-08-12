@@ -1,0 +1,52 @@
+
+
+/* On screens that are below 670 */
+@media (max-width:669px) {
+    .__login-container{
+        
+        min-width: 55vw;
+        margin: 5vh 2px 8vh 2px;
+        }
+    }
+/* On screens that are above 670 */
+@media (min-width:670px) {
+    .__login-container{
+    // min-width: 100%;
+    margin: 5vh 0 5vh 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+        .__myfield{
+            width: 280px;
+        }
+    
+    }
+}
+
+.__login-container{
+    display: flex;
+    flex-direction: column;
+    
+    h4{
+        color:white;
+    }
+    a{
+        text-decoration: none;
+        font-size: 12px;
+    }
+    form{
+        
+        display: flex;
+        flex-direction: column;
+        color: white;
+        
+    }
+    .__auth-submit-button{
+        margin-top: 3em;
+        padding: .5em 0;
+    }
+    .__forgotten{
+        text-align: right;
+    }
+}

@@ -1,0 +1,34 @@
+<div class="__register-container">
+    <h4>Inscription</h4>
+    <form ngSubmit="test()">
+        
+        <div class="__nom-prenom-block">
+            <mat-form-field>
+                <input matInput placeholder="Nom" type="text" value="">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Prénom" type="text" value="">
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>Fonction</mat-label>
+            <mat-select placeholder="Fonction..."  >
+                <mat-option *ngFor="let titre of titres" [value]="titre.value">
+                    {{titre.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" type="email" value="">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Passe" type="password" value="">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Confirmer Passe" type="password" value="">
+        </mat-form-field>
+        <button mat-flat-button type="submit" color='accent' class="__auth-submit-button">S'enregistrer</button>
+
+    </form>
+
+</div>

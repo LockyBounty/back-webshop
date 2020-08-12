@@ -1,0 +1,44 @@
+<div class="__login-container">
+    <h4>Connexion</h4>
+    <form [formGroup]="myForm" 
+    FormControl=control 
+    autocomplete="on" 
+    (ngSubmit)="test()"> 
+    <!-- ngSubmit entre parentheses !! -->
+        <mat-form-field class="__myfield"  autofocus>
+            
+                <input matInput 
+                placeholder="Email" 
+                etaEmailValidate
+                type="email" 
+                value=""
+                
+                name="Username"
+                formControlName="emailAddress"
+                required>
+            
+        </mat-form-field>
+        <mat-form-field class="__myfield" autofocus>
+            
+                <input matInput 
+                placeholder="Password" 
+                type="password" 
+                value=""
+                
+                name="Password"
+                formControlName="password"
+                required>
+            
+        </mat-form-field>
+        <a class="__forgotten">Mot de passe oublié ?</a>
+        <button 
+        mat-flat-button 
+        type="submit" 
+        color='accent' 
+        class="__auth-submit-button"
+        [disabled]="!myForm.valid"
+        >Connexion</button>
+
+    </form>
+
+</div>

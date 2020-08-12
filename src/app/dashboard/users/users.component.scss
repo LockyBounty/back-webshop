@@ -1,0 +1,59 @@
+
+// <-- CUSTOM COLORS --> //
+
+// $vert-degrade : linear-gradient(60deg,#66bb6a,#43a047); dégradé marche pas
+$indigo : #3E50B4;
+
+// .bg-vert-2{
+//     background-color: $vert-degrade;
+// }
+// .bg-orange-2{
+//     background-color: linear-gradient(45deg, rgb(242, 59, 59) 0%, rgb(239, 144, 39) 100%);
+// }
+.bg-indigo{
+    background-color: $indigo;
+}
+////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+
+.__main-toolbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 1vw 0 1vw; 
+    height: 80px;
+    
+    .__main-toolbar-button{
+        display: flex;
+        justify-content: center;
+        height: 40px;
+        margin: 0 0vw 0 .5vw; 
+        text-align: center;
+        text-justify: center;
+    
+    }
+    .__searchbar {
+        // margin:10px;
+        width: 200px;
+        // border: 1px solid lightgray;
+        color: #222D32;
+        box-shadow: none;
+        input{
+            box-shadow: none;
+            margin:10px 0px 10px 10px;
+        }
+    }
+    .__searchbar-button {
+        display: flex;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border: none;
+        color: #222D32;
+    }
+    .__spacer{
+        flex: 1 1 auto;
+    }
+}

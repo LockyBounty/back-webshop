@@ -1,0 +1,26 @@
+.__register-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 20vw;
+    margin: 5vh 0 8vh 0;
+
+    h4{
+        color:white;
+    }
+    form{
+        
+        display: flex;
+        flex-direction: column;
+        color: white;
+        
+    }
+    .__nom-prenom-block{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .__auth-submit-button{
+        margin-top: 3em;
+        padding: .5em 0;
+    }
+}

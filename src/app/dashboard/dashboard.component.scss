@@ -1,0 +1,240 @@
+
+@font-face {
+  font-family: Source;
+  src: url(../../assets/fonts/SourceSansPro-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: Raleway;
+  src: url(../../assets/fonts/Raleway-Medium.ttf) format("truetype");
+}
+
+
+fa-icon {
+  padding-right: 8px;
+}
+
+
+.__dashboard-container {
+  display: flex;
+  flex-direction: row;
+  
+  .__sidebar-content{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(42, 55, 61);
+    width: 250px;
+    height: 100vh;
+  }
+  .__list-options{
+    color: black;
+  }
+  
+}
+.__right-container {
+  display: flex;
+  flex-direction: column;
+  background-color:#EEEEEE;
+  width: 100%;
+}
+
+// .hoverme{
+//   color:white;
+//   background-color: #F44336;
+// }
+// .hovermedisable{
+//   color:white;
+//   background: none;
+// }
+
+//////////////////////////<--Left Side-->/////////////////////////
+
+.sidenav-container {
+  height: 100%;
+  
+}
+.__company-block{
+  background-color: #222D32;
+  font-family: Raleway;
+  display: flex;
+  border-radius: 0;
+  z-index:1;
+
+  .company-logo-left{
+    background-image: url('../../assets/images/LOKIresized90.png');
+    background-size:contain ;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    margin-top: 7px;
+  }
+  .__nom{
+    color: whitesmoke;
+    font-size: 20px;
+  }
+  .__poste{
+    color: whitesmoke;
+  }
+}
+
+
+.left-list {
+  padding: 0;
+}
+
+// style de la liste de menu
+.whiter {
+  color : lightgray;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  text-indent: .3em;
+  
+  &:hover{
+    color: white;
+    background-color:#F44336;
+    &::before{
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: whitesmoke;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform .2s, opacity .2s;
+  }
+  button {
+    border: none;
+  }
+  fa-icon{
+    margin-right: 5px;
+  }
+}
+.active{
+  padding-left:10px;
+  background-color: #F44336;
+  text-indent: 5px;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: whitesmoke;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform .2s, opacity .2s;
+  }
+}
+.active-tab {
+  color : white;
+  // color: white;
+  // background-color: #F44336;
+  // padding-left: 5px;
+  border-radius: 2px;
+  text-indent: 1em;
+  text-decoration: none;
+  // box-shadow: 0 8px 6px -6px lightgrey;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: #F44336;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  
+}
+
+
+//////////////////////////<--Right Side-->/////////////////////////
+
+/* On screens that are above 600 */
+@media (min-width:900px) {
+  // .__close-button {
+  //     display: none;
+  //     position: absolute;
+  //     right: 0;
+  //     z-index: 5;
+  //     color: #F44336;
+  //     background: none;
+  // }
+  .__close-button-toolbar {
+    display: none;
+    z-index: 5;
+    color: #222D32;
+    background: none;
+  }
+}
+/* On screens that are below 900 */
+@media (max-width:899px) {
+  // .__close-button {
+  //     position: absolute;
+  //     right: 0;
+  //     z-index: 5;
+  //     color: #F44336;
+  //     background: none;
+  // }
+  .__close-button-toolbar {
+      right: 0;
+      z-index: 5;
+      color: #222D32;
+      background: none;
+  }
+}
+
+.__main-header {
+  background-color: white;
+  box-shadow: 0 8px 6px -6px lightgrey;
+  z-index: 1;
+
+  .__end-toolbar-block{
+    display: flex;
+    flex-direction: row;
+    .__identity{
+      padding: 0 2vw 0 2vw;
+      background-color: white;
+      font-family: Raleway;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0;
+      
+      .__nom-u{
+        color: #222D32;
+        font-size: 16px;
+        margin:0;
+        height: 25px;
+      }
+      .__poste-u{
+        color: gray;
+        font-size: 12px;
+        margin:0;
+        height: 25px;
+        display: flex;
+        align-items: center;
+      }
+    }
+    .__dropdown-button{
+      margin-top: 1em;
+    }
+    .__dropdown-menu{
+      margin-top: 1em;
+      padding: 0;
+      
+      background-color: white;
+    }
+  }
+  .__spacer{
+    flex: 1 1 auto;
+  }
+}
+

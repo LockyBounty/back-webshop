@@ -1,0 +1,19 @@
+.__searchbar {
+    // margin:10px;
+    width: 200px;
+    // border: 1px solid lightgray;
+    color: #222D32;
+    box-shadow: none;
+    input{
+        box-shadow: none;
+        margin:10px 0px 10px 10px;
+    }
+}
+.__searchbar-button {
+display: flex;
+align-items: center;
+width: 30px;
+height: 30px;
+border: none;
+color: #222D32;
+}

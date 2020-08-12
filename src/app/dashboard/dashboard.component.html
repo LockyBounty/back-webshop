@@ -1,0 +1,126 @@
+<div class="__dashboard-container">
+  
+  
+    <div class="__sidebar-content mat-elevation-z5" mode="side" #drawer  fxShow="true" fxHide.lt-md="true" >
+      <mat-card class="__company-block mat-elevation-z3">
+        <mat-card-header >
+          <div mat-card-avatar class="company-logo-left"></div>
+          <!-- <button mat-flat-button class="__close-button" (click)="onToggleSidenav()"><mat-icon>close</mat-icon></button> -->
+          <mat-card-title class="__nom">Loki Corp</mat-card-title>
+          <mat-card-subtitle class="__poste">Dashboard</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+
+      <mat-action-list class="left-list" dense>
+        <a routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==0 }" (click)="goOverview()"> 
+          <fa-icon [icon]="overview"></fa-icon> Vue d'ensemble  
+        </a>
+        <a routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==1 }" (click)="goProducts()"> 
+          <fa-icon [icon]="liste"></fa-icon> Produits 
+        </a>
+        <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==2 }" (click)="goOrders()">
+          <fa-icon [icon]="palette"></fa-icon> Commandes
+        </a>
+        <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==3 }" (click)="goUsers()"> 
+          <fa-icon [icon]="utilisateur"></fa-icon> Utilisateurs 
+        </a>
+        <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==4 }" (click)="goMessages()"> 
+            <fa-icon [icon]="commentaire"></fa-icon>Messages 
+        </a>
+      </mat-action-list>
+      
+    </div>
+
+    
+    <div class="__sidebar-content mat-elevation-z5" mode="over" #drawer  fxShow="true" fxHide.gt-sm="true" *ngIf="isVisible" >
+      <mat-card class="__company-block mat-elevation-z3" (click)="onToggleSidenav()">
+        <mat-card-header>
+          <div mat-card-avatar class="company-logo-left"></div>
+          <mat-card-title class="__nom">LokiCorp</mat-card-title>
+          <mat-card-subtitle class="__poste">Dashboard</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+
+      <mat-action-list class="left-list">
+        <a routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==0 }" (click)="goOverview2()"> 
+          <fa-icon [icon]="overview"></fa-icon> Panel 
+        </a>
+        <a routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==1 }" (click)="goProducts2()"> 
+          <fa-icon [icon]="liste"></fa-icon> Produits 
+        </a>
+        <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==2 }" (click)="goOrders2()">
+          <fa-icon [icon]="palette"></fa-icon> Commandes
+        </a>
+        <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==3 }" (click)="goUsers2()"> 
+          <fa-icon [icon]="utilisateur"></fa-icon> Utilisateurs 
+        </a>
+        <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==4 }" (click)="goMessages2()"> 
+            <fa-icon [icon]="commentaire"></fa-icon>Messages 
+        </a>
+      </mat-action-list>
+    </div>
+    <!-- right side -->
+    <div class="__right-container">
+      <mat-toolbar class="__main-header">
+        <button mat-flat-button 
+          class="__close-button-toolbar" 
+          (click)="onToggleSidenav()"
+          *ngIf="!isVisible"
+          ><mat-icon>menu</mat-icon>
+        </button>
+        <span class="__spacer">
+          
+        </span>
+        
+        <div class="__end-toolbar-block">
+          <div class="__identity" fxHide.lt-sm="true">
+            <div class="__nom-u">Luke</div>
+            <div class="__poste-u">Manager</div>
+          </div>
+  
+          <button mat-icon-button 
+          [matMenuTriggerFor]="menu"
+          class="__dropdown-button" 
+          color="primary"><mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="__dropdown-menu" dense>
+            <button mat-menu-item><mat-icon>settings</mat-icon>Paramètres</button>
+            <button mat-menu-item><mat-icon>logout</mat-icon>Déconnexion</button>
+          </mat-menu>
+
+        </div>
+
+      </mat-toolbar>
+
+      <router-outlet></router-outlet>
+      
+    </div>
+    
+</div>
+
+
+
+
+<!-- Exemple
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+  <mat-tab label="First"> Content 1 </mat-tab>
+  <mat-tab label="Second"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group> -->
+
+
+<!-- methode Diogo -->
+      <!-- <ul class="list-group">
+        <li class="list-group-item" #f (click)="test1(f, 'products')">
+          <a routerLinkActive="active" routerLink="products"class="navlink mat-elevation-z3">
+            <fa-icon [icon]="caddie"></fa-icon>
+            Produits
+          </a>
+        </li>        
+        <li class="list-group-item" routerLinkActive="active" #g (click)="test1(g, 'orders')">
+          <a class="navlink  mat-elevation-z3">
+            <fa-icon [icon]="palette"></fa-icon>
+            Commandes
+          </a>
+        </li>
+      </ul> -->
