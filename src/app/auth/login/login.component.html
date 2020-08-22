@@ -1,42 +1,63 @@
 <div class="__login-container">
     <h4>Connexion</h4>
-    <form [formGroup]="myForm" 
-    FormControl=control 
-    autocomplete="on" 
-    (ngSubmit)="test()"> 
+    <form 
+    *ngIf="!isLoggedIn"
+    name="myForm"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+    > 
     <!-- ngSubmit entre parentheses !! -->
         <mat-form-field class="__myfield"  autofocus>
-            
-                <input matInput 
-                placeholder="Email" 
-                etaEmailValidate
+                <input 
+                matInput 
                 type="email" 
-                value=""
-                
-                name="Username"
-                formControlName="emailAddress"
-                required>
-            
+                placeholder="Email" 
+                type="text"
+                name="email"
+                [(ngModel)]="myForm.email"
+                required
+                #username="ngModel">
         </mat-form-field>
+        <!-- si error -->
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && username.invalid"
+            >
+            Username is required!
+        </div>
+        <!-- fin error -->
         <mat-form-field class="__myfield" autofocus>
-            
-                <input matInput 
-                placeholder="Password" 
-                type="password" 
-                value=""
-                
-                name="Password"
-                formControlName="password"
-                required>
-            
+            <input 
+            matInput 
+            type="password"
+            placeholder="Password" 
+            class="form-control"
+            name="password"
+            [(ngModel)]="myForm.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            >
         </mat-form-field>
+        <!-- si error -->
+        <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+            </div>
+        </div>
+        <!-- fin error -->
         <a class="__forgotten">Mot de passe oublié ?</a>
         <button 
         mat-flat-button 
         type="submit" 
         color='accent' 
         class="__auth-submit-button"
-        [disabled]="!myForm.valid"
         >Connexion</button>
 
     </form>

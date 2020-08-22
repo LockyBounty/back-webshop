@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-auth',
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private router: Router, private aRoute : ActivatedRoute) { }
+  constructor(private router: Router, private aRoute : ActivatedRoute, private token : TokenStorageService) { }
 
   ngOnInit(): void {
   }
@@ -29,6 +30,11 @@ export class AuthComponent implements OnInit {
     else if ($event.index === 1){
       this.router.navigate(['register'], {relativeTo :this.aRoute});
     }
+  }
+
+  logout(){
+    this.token.signOut();
+    window.location.reload(); //rafraichir la page sinon reste bloqué
   }
 
 }

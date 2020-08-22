@@ -11,7 +11,7 @@ import { faDolly,
   faChartPie } from '@fortawesome/free-solid-svg-icons';
 
 
-
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,13 +32,39 @@ export class DashboardComponent {
   utilisateur = faUserAstronaut;
   commentaire = faCommentDollar;
 
+  currentUser: any;
+
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username: string;
+  private roles : string[];
 
   isDisabled : boolean;
   index: number;
   tab: number=0;
   
-  constructor(private breakpointObserver: BreakpointObserver, fb: FormBuilder,
-    private router: Router, private route : ActivatedRoute) {}
+  constructor(private breakpointObserver: BreakpointObserver, 
+    private fb: FormBuilder,
+    private router: Router, 
+    private route : ActivatedRoute,
+    private token: TokenStorageService) {}
+
+
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.token.getToken();
+
+    if (this.isLoggedIn){
+      const user = this.token.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    }
+    this.currentUser = this.token.getUser(); //si token acces au component
+  }
 
   //<-- isHandset va consulter selon la taille de l'écran et envoyer les instructions sur le sidebar ici
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -81,6 +107,7 @@ export class DashboardComponent {
     
   }
 
+
   //<--pour sidebar hors mobile
   goOverview2(){
     this.tab = 0;
@@ -108,6 +135,10 @@ export class DashboardComponent {
     this.onToggleSidenav();
   }
   
+  //Redirection vers auth si pas loggé
+  goAuth(){
+    this.router.navigate(["auth"])
+  }
 
   //<-- link active méthode Diogo
 //   previouspage = null;

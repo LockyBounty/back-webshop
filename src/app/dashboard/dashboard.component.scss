@@ -13,6 +13,10 @@ fa-icon {
   padding-right: 8px;
 }
 
+a {
+  text-decoration: none;
+}
+
 
 .__dashboard-container {
   display: flex;
@@ -91,6 +95,7 @@ fa-icon {
   &:hover{
     color: white;
     background-color:#F44336;
+
     &::before{
       opacity: 1;
       transform: scaleY(1);

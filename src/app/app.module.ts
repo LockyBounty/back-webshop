@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import {Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from 'ng-sidebar';
-import {HttpClientModule} from '@angular/common/http';
 
+//special connection
+import {HttpClientModule} from '@angular/common/http';
+import {authInterceptorProviders} from './_helpers/auth.interceptor';
+//
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -34,11 +37,18 @@ import { MatListModule } from '@angular/material/list';
 import { OverviewComponent } from './dashboard/overview/overview.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { TestauthComponent } from './auth/testauth/testauth.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
+import { BoardUserComponent } from './board-user/board-user.component';
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const appRoutes : Routes = [
   {
-    path: "", redirectTo : "auth",pathMatch: 'full' 
+    path: "", redirectTo : "home",pathMatch: 'full' 
   },
   // {
   //   path: "", component : AppComponent,
@@ -56,8 +66,10 @@ const appRoutes : Routes = [
       {path: "products", component: ProductsComponent},
       {path: "orders", component: OrdersComponent},
       {path: "users", component: UsersComponent},
+      {path: "profile", component: ProfileComponent},
       {path: "messages", component: MessagesComponent},
-    ]
+    ],
+    canActivate: [AuthGuardService]
   },
   {
     path: "auth", 
@@ -65,15 +77,28 @@ const appRoutes : Routes = [
     children: [
       {
         path:'',//<--le root redirige par default à l'enfant 'login'
-        redirectTo: 'login',
+        redirectTo: 'testauth',
         pathMatch: 'full' 
       },
       {path: "login", component: LoginComponent},
+      {path: "testauth", component: TestauthComponent},
       {path: "register", component: RegisterComponent},
     ]
   },
   {
     path: "test", component : TestmeComponent
+  },
+  {
+    path: "home", component : HomeComponent
+  },
+  {
+    path: "user", component : BoardUserComponent
+  },
+  {
+    path: "mod", component : BoardModeratorComponent
+  },
+  {
+    path: "admin", component : BoardAdminComponent
   },
 
   {
@@ -96,7 +121,13 @@ const appRoutes : Routes = [
     TestmeComponent,
     OverviewComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TestauthComponent,
+    ProfileComponent,
+    BoardUserComponent,
+    BoardModeratorComponent,
+    BoardAdminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -119,8 +150,10 @@ const appRoutes : Routes = [
     HttpClientModule,
   
   ],
+  exports:[RouterModule],
   providers: [
-    
+    authInterceptorProviders,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

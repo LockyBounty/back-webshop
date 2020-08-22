@@ -1,0 +1,96 @@
+<div class="__register-container">
+    <h4>Inscription Test</h4>
+    <form
+    *ngIf="!isSuccessful"
+    name="mySubscribeForm"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+    >
+    <!-- Attention à (ngSubmit)="f.form.valid && onSubmit()"  ||<-- "form" vient de ngForm  -->
+        <div class="__nom-prenom-block">
+            <mat-form-field>
+                <input 
+                matInput 
+                type="text" 
+                placeholder="Nom d'utilisateur" 
+                name="username"
+                [(ngModel)]="mySubscribeForm.username"
+                required
+                minlength="3"
+                maxlength="20"
+                #username="ngModel"
+                autofocus>
+            </mat-form-field>
+            <!-- <p *ngIf="Username.value.length <4">Minimum 4 caractères</p> -->
+        </div>
+        <!-- si error -->
+        <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">Username is required</div>
+            <div *ngIf="username.errors.minlength">
+                Username must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors.maxlength">
+                Username must be at most 20 characters
+            </div>
+        </div>
+        <!-- fin error -->
+        <mat-form-field>
+            <input 
+            matInput 
+            type="email" 
+            placeholder="Email" 
+            name="email"
+            [(ngModel)]="mySubscribeForm.email"
+            required
+            email
+            #email="ngModel"
+            autofocus>
+        </mat-form-field>
+        <!-- si error -->
+        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">
+                Email must be a valid email address
+            </div>
+        </div>
+        <!-- fin error -->
+        <mat-form-field>
+            <input 
+            matInput 
+            type="password" 
+            placeholder="Passe" 
+            name="password"
+            [(ngModel)]="mySubscribeForm.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            autofocus>
+        </mat-form-field>
+        <!-- si error -->
+        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+                Password must be at least 6 characters
+            </div>
+        </div>
+        <!-- fin error -->
+        <button 
+        
+        mat-flat-button 
+        type="submit" 
+        color='accent' 
+        class="__auth-submit-button"
+        >S'enregistrer</button>
+
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+            Signup failed!<br />{{ errorMessage }}
+        </div>
+
+    </form>
+    
+    <div class="alert alert-success" *ngIf="isSuccessful">
+        Your registration is successful!
+    </div>
+
+</div>
