@@ -2,54 +2,68 @@
     <h4>Connexion</h4>
     <form 
     *ngIf="!isLoggedIn"
+    class="__log-fields-width"
     name="myForm"
     (ngSubmit)="f.form.valid && onSubmit()"
     #f="ngForm"
     novalidate
     > 
     <!-- ngSubmit entre parentheses !! -->
-        <mat-form-field class="__myfield"  autofocus>
+        <mat-form-field  autofocus>
+            <mat-label>Email</mat-label>
                 <input 
                 matInput 
                 type="email" 
-                placeholder="Email" 
-                type="text"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+                placeholder="example@gmail.com" 
                 name="email"
                 [(ngModel)]="myForm.email"
                 required
-                #username="ngModel">
+                #email="ngModel"
+                >
+            <!-- si error -->
+            <mat-error *ngIf="email.invalid">
+                <p *ngIf="email.errors.pattern">Veuillez entrer un email <strong>valide</strong></p>
+            </mat-error>
+            <mat-error *ngIf="f.submitted && email.invalid">
+                <p *ngIf="email.errors.required"> Votre email est <strong>requis</strong></p>
+            </mat-error>
+            <!-- <mat-hint
+                *ngIf="f.submitted && email.invalid"
+                >
+                Valid email is required!
+            </mat-hint> -->
+            <!-- fin error -->
         </mat-form-field>
-        <!-- si error -->
-        <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="f.submitted && username.invalid"
-            >
-            Username is required!
-        </div>
-        <!-- fin error -->
-        <mat-form-field class="__myfield" autofocus>
+            
+        <mat-form-field autofocus>
+            <mat-label>Password</mat-label>
             <input 
             matInput 
             type="password"
             placeholder="Password" 
-            class="form-control"
             name="password"
             [(ngModel)]="myForm.password"
             required
             minlength="6"
             #password="ngModel"
             >
+            <mat-error *ngIf="password.invalid">
+                <p *ngIf="password.errors.minlength"> Doit comporter au moins 6 caractères</p>
+            </mat-error>
+            <mat-error *ngIf="f.submitted && password.invalid">
+                <p *ngIf="password.errors.required"> Votre mot de passe est <strong>requis</strong></p>
+                
+            </mat-error>
         </mat-form-field>
         <!-- si error -->
+        
         <div
-            class="alert alert-danger"
-            role="alert"
-            *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">
-            Password must be at least 6 characters
-            </div>
+            
+            *ngIf="f.submitted && isLoginFailed">
+            <div>Echec de l'authentification</div>
+            <div>{{errorMessage}}</div>
+            
         </div>
         <!-- fin error -->
         <a class="__forgotten">Mot de passe oublié ?</a>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
-interface Titre { 
-  value: string;
-}
+import {MatDialog, MatDialogClose, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,29 +14,73 @@ interface Titre {
 })
 
 export class RegisterComponent implements OnInit {
-  mySubscribeForm : FormGroup;
+  
+  hide = true;
 
-  titres: Titre[]=[
-    {value:"Agent de liaison"},
-    {value: "Fournisseur"},
-    {value: "Gestionnaire"}]
+  myForm: any = {};
+  isLoggedIn = false;
+  isSuccessful =false; 
+  isSignUpFailed = false;
+  errorMessage= "";
 
-  constructor(private fb:FormBuilder) { }
+  minPw = 6;
 
-  ngOnInit() {
-    this.mySubscribeForm = this.fb.group({
-      emailAddress: [null, [Validators.required, this.emailValidator]],
-      password: [null, [Validators.required, Validators.minLength(6)]]
-    })
-  }
+  time: number = 3;
+  interval;
 
-  emailValidator(control) {
-    if (control.value) {
-      const matches = control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/);
-      return matches ? null : { 'invalidEmail': true };
-    } else {
-      return null;
+  constructor(
+    private authService : AuthService,
+    private router: Router,
+    private token: TokenStorageService,
+    public dialog: MatDialog) { }
+
+  ngOnInit() : void{
+    if (this.token.getToken()){
+      this.isLoggedIn = true;
     }
   }
 
+  onSubmit(){
+    // console.log(this.myForm)
+    this.authService.register(this.myForm).subscribe(
+      data=>{
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+        this.startTimer(); //redirection countdown
+        setTimeout(()=>{
+          this.router.navigate(['auth','login']);
+        }, 3000);
+        
+        
+      },
+      err =>{
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+        // this.openDialog(this.isSuccessful)
+      }
+    )
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.time--;
+    },1000)
+  }
+
+  // openDialog(resultat) {
+  //   const result:boolean = resultat;
+  //   this.dialog.open(RegisterDialog);
+  //   }
+    
 }
+
+
+//pour la popup de confirmation
+
+// @Component({
+//   selector: 'register-dialog',
+//   templateUrl: 'register-dialog.html',
+// })
+
+// export class RegisterDialog {}

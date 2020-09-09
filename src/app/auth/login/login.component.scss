@@ -4,26 +4,25 @@
 @media (max-width:669px) {
     .__login-container{
         
-        min-width: 55vw;
+        min-width: 250px;
         margin: 5vh 2px 8vh 2px;
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;
         }
         h4{
             align-self: center;
+            margin-bottom: 3vh;
         }
     }
 /* On screens that are above 670 */
 @media (min-width:670px) {
     .__login-container{
-    // min-width: 100%;
-    margin: 5vh 0 5vh 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-        .__myfield{
-            width: 280px;
-        }
+        min-width: 300px;
+        margin: 5vh 0 5vh 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     
     }
 }
@@ -34,6 +33,7 @@
     
     h4{
         color:white;
+        margin-bottom: 3vh;
     }
     a{
         text-decoration: none;
@@ -52,5 +52,11 @@
     }
     .__forgotten{
         text-align: right;
+        margin: 1vh 0 1vh 0; 
+        color:orange;
     }
+}
+
+.__log-fields-width{
+    width: 80%;
 }

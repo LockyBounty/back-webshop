@@ -23,17 +23,18 @@ import { HeaderComponent } from './header/header.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import {MaterialModule} from "./material-module";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 import { ProductsComponent } from './dashboard/products/products.component';
 import { OrdersComponent } from './dashboard/orders/orders.component';
 import { UsersComponent } from './dashboard/users/users.component';
 import { MessagesComponent } from './dashboard/messages/messages.component';
 import { TestmeComponent } from './testme/testme.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+
 import { OverviewComponent } from './dashboard/overview/overview.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -44,11 +45,14 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ProductDetailsComponent } from './dashboard/products/product-details/product-details.component';
+import { ProductAddingComponent } from './dashboard/products/product-adding/product-adding.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const appRoutes : Routes = [
   {
-    path: "", redirectTo : "home",pathMatch: 'full' 
+    path: "", redirectTo : "dashboard",pathMatch: 'full' 
   },
   // {
   //   path: "", component : AppComponent,
@@ -63,7 +67,14 @@ const appRoutes : Routes = [
         pathMatch: 'full' 
       },
       {path: "overview", component: OverviewComponent},
-      {path: "products", component: ProductsComponent},
+      {
+        path: "products", 
+        component: ProductsComponent,
+        children: [
+          {path:"product-details", component: ProductDetailsComponent},
+          {path:"product-adding", component: ProductAddingComponent}
+        ]
+      },
       {path: "orders", component: OrdersComponent},
       {path: "users", component: UsersComponent},
       {path: "profile", component: ProfileComponent},
@@ -77,33 +88,22 @@ const appRoutes : Routes = [
     children: [
       {
         path:'',//<--le root redirige par default à l'enfant 'login'
-        redirectTo: 'testauth',
+        redirectTo: 'login',
         pathMatch: 'full' 
       },
       {path: "login", component: LoginComponent},
-      {path: "testauth", component: TestauthComponent},
+      // {path: "testauth", component: TestauthComponent},
       {path: "register", component: RegisterComponent},
     ]
   },
-  {
-    path: "test", component : TestmeComponent
-  },
-  {
-    path: "home", component : HomeComponent
-  },
-  {
-    path: "user", component : BoardUserComponent
-  },
-  {
-    path: "mod", component : BoardModeratorComponent
-  },
-  {
-    path: "admin", component : BoardAdminComponent
-  },
+  {  path: "test", component : TestmeComponent},
+  {  path: "home", component : HomeComponent },
+  {  path: "user", component : BoardUserComponent },
+  {  path: "mod", component : BoardModeratorComponent },
+  {  path: "admin", component : BoardAdminComponent },
+  {  path: "not-found", component : NotFoundComponent },
 
-  {
-    path: "**", redirectTo : ""
-  },
+  {  path: "**", redirectTo : "not-found" },
   
 
 ]
@@ -127,7 +127,10 @@ const appRoutes : Routes = [
     BoardUserComponent,
     BoardModeratorComponent,
     BoardAdminComponent,
-    HomeComponent
+    HomeComponent,
+    ProductDetailsComponent,
+    ProductAddingComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

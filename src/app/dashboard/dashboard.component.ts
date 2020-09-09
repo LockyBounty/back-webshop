@@ -8,7 +8,8 @@ import { faDolly,
   faShoppingCart, 
   faUserAstronaut, 
   faCommentDollar, 
-  faChartPie } from '@fortawesome/free-solid-svg-icons';
+  faChartPie,
+  faUserAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 import { TokenStorageService } from '../services/token-storage.service';
@@ -31,6 +32,7 @@ export class DashboardComponent {
   palette = faDolly;
   utilisateur = faUserAstronaut;
   commentaire = faCommentDollar;
+  deconnexion = faUserAlt;
 
   currentUser: any;
 
@@ -135,9 +137,9 @@ export class DashboardComponent {
     this.onToggleSidenav();
   }
   
-  //Redirection vers auth si pas loggé
-  goAuth(){
-    this.router.navigate(["auth"])
+  logout(){
+    this.token.signOut();
+    window.location.reload(); //rafraichir la page sinon reste bloqué
   }
 
   //<-- link active méthode Diogo

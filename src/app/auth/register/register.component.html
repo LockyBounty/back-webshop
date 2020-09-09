@@ -1,42 +1,118 @@
 <div class="__register-container">
     <h4>Inscription</h4>
-    <form ngSubmit="test()">
-        
-        <div class="__nom-prenom-block">
-            <mat-form-field>
-                <input matInput placeholder="Nom" type="text" value="">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Prénom" type="text" value="">
-            </mat-form-field>
-        </div>
+    <form 
+    *ngIf="!isLoggedIn"
+    class="__my-fielder"
+    name="myForm"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+    >
+        <!-- Avec ngModel, ne pas oublier la prop "name" -->
+        <mat-form-field autofocus>
+            <mat-label>Nom d'utilisateur</mat-label>
+            <input 
+            matInput 
+            type="text"
+            name="username"
+            [(ngModel)]="myForm.username"
+            minlength="3"
+            maxlength="20"
+            required
+            #username="ngModel"
+            >
+            <mat-error *ngIf="username.invalid">
+                <p *ngIf="username.errors.required">Champs requis</p>
+                <p *ngIf="username.errors.minlength || username.errors.maxlength">Entre 3 et 20 caractères</p>
+            </mat-error>
+        </mat-form-field>
+
         <mat-form-field>
-            <mat-label>Fonction</mat-label>
-            <mat-select placeholder="Fonction..."  >
-                <mat-option *ngFor="let titre of titres" [value]="titre.value">
-                    {{titre.value}}
-                </mat-option>
-            </mat-select>
+            <mat-label>Email</mat-label>
+            <input 
+            matInput 
+            type="email"
+            name="email"
+            placeholder="example@gmail.com" 
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+            [(ngModel)]="myForm.email"
+            #email="ngModel"
+            required
+            
+            >
+            <mat-error *ngIf="email.invalid">
+                <p *ngIf="email.errors.required">Champs requis</p>
+                <p *ngIf="email.errors.pattern">Entrez un email valide</p>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input 
+            matInput 
+            name="password"
+            type="password"
+            [(ngModel)]="myForm.password"
+            minlength="6"
+            #password="ngModel"
+            required
+            autocomplete="off"
+            > 
+            <mat-error *ngIf="password.invalid">
+                <p *ngIf="password.errors.required">Champs requis</p>
+                <p *ngIf="password.errors.minlength">
+                    {{minPw}} caractères minimum
+                </p>
+            </mat-error> 
+
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Email" type="email" value="">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Passe" type="password" value="">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Confirmer Passe" type="password" value="">
-        </mat-form-field>
-        <button mat-flat-button type="submit" color='accent' class="__auth-submit-button">S'enregistrer</button>
+            <mat-label>Confirmez le mot de passe</mat-label>
+            <input 
+            matInput 
+            name="confirmP"
+            type="password"
+            [(ngModel)]="myForm.confirmP"
+            pattern="{{password.value}}" 
+            #confirmP="ngModel"
+            [type]="hide ? 'password' : 'text'"
+            required
+            autocomplete="off"
+            >
+
+                <mat-icon matSuffix (click)="hide = !hide" class="__bouton-visible">
+                {{hide ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+
+            <mat-error *ngIf="confirmP.invalid">
+                <p *ngIf="confirmP.errors.pattern">
+                    Veuillez vérifier le mot de passe
+                </p>
+            </mat-error> 
+        </mat-form-field> 
+
+        <button mat-flat-button 
+        type="submit" 
+        color='accent' 
+        class="__auth-submit-button"
+        >
+        S'enregistrer
+        </button>
 
         <!-- <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
             L'inscription a échoué !<br />{{ errorMessage }}
         </div> -->
 
+        <div class="__result-box" *ngIf="f.submitted && isSignUpFailed">
+            Oups ! 
+            {{ errorMessage }}
+        </div>
+    
+        <div class="__result-box" *ngIf="isSuccessful">
+            Inscription réussie ! <br>
+            On vous redirige dans {{time}}s...
+        </div>
     </form>
 
-    <!-- <div class="alert alert-success" *ngIf="isSuccessful">
-        Inscription réussie !
-    </div> -->
 
 </div>

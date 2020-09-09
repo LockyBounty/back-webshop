@@ -17,6 +17,17 @@ a {
   text-decoration: none;
 }
 
+.left-list-bottom {
+  margin-top: auto; //placer au bottom du container
+  
+}
+
+// #logmeout{
+//   // justify-self: flex-end ;
+//   // z-index:12;
+//   // position: absolute;
+//   // bottom: 0;
+// }
 
 .__dashboard-container {
   display: flex;
@@ -25,6 +36,7 @@ a {
   .__sidebar-content{
     display: flex;
     flex-direction: column;
+    // justify-content: space-between;
     background-color: rgb(42, 55, 61);
     width: 250px;
     height: 100vh;

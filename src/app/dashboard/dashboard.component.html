@@ -29,7 +29,12 @@
             <fa-icon [icon]="commentaire"></fa-icon>Messages 
         </a>
       </mat-action-list>
-      
+      <mat-action-list class="left-list-bottom" dense>
+        
+        <a  routerLinkActive="active" mat-list-item class="whiter" id="logmeout" (click)="logout()"> 
+            <fa-icon [icon]="deconnexion"></fa-icon>Déconnexion
+        </a>
+      </mat-action-list>
     </div>
 
     
@@ -57,6 +62,12 @@
         </a>
         <a  routerLinkActive="active" mat-list-item class="whiter" [ngClass]=" {'active-tab': tab==4 }" (click)="goMessages2()"> 
             <fa-icon [icon]="commentaire"></fa-icon>Messages 
+        </a>
+      </mat-action-list>
+      <mat-action-list class="left-list-bottom" >
+        
+        <a  routerLinkActive="active" mat-list-item class="whiter" id="logmeout" (click)="logout()"> 
+            <fa-icon [icon]="deconnexion"></fa-icon>Déconnexion
         </a>
       </mat-action-list>
     </div>

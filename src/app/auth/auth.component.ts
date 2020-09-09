@@ -9,9 +9,18 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private router: Router, private aRoute : ActivatedRoute, private token : TokenStorageService) { }
+  isLoggedIn = false;
+
+  constructor(private router: Router, 
+    private aRoute : ActivatedRoute, 
+    private token : TokenStorageService
+    ) { }
 
   ngOnInit(): void {
+    if (this.token.getToken()){
+      this.isLoggedIn = true;
+      this.router.navigate(['dashboard']);
+    }
   }
 
   toLogin(){

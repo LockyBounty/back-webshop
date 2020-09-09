@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, 
+  FormGroup, Validators, 
+  FormGroupDirective, NgForm } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from '../../services/token-storage.service';
 import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-login',
@@ -17,6 +24,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
+
   constructor(private authService:AuthService, 
     private tokenStorage: TokenStorageService,
     private router: Router) { }
@@ -29,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    // console.log(this.myForm)
     this.authService.login(this.myForm).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);

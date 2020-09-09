@@ -1,13 +1,18 @@
+
+
 .__register-container{
     display: flex;
     flex-direction: column;
-    
-    min-width: 20vw;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    min-width: 300px;
     margin: 5vh 0 8vh 0;
 
     h4{
         color:white;
         align-self: center;
+        margin-bottom:2vh;
         
     }
     form{
@@ -26,4 +31,28 @@
         margin-top: 3em;
         padding: .5em 0;
     }
+    .__my-fielder{
+        width: 80%;
+    }
+    .__result-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius:6px;
+        border: solid 1px #fff;
+        background-color: rgba(39, 39, 39, 0.8);
+        margin-top:3vh;
+        padding:1vh 1vw;
+        min-width:180px;
+        min-height: 40px;
+        text-align: center;
+    }
+    .__bouton-visible{
+        cursor: pointer;
+        color: rgba(187, 185, 185, 0.8);
+    }
+    .__nopadding{
+        padding: 0;
+    }
+    
 }
