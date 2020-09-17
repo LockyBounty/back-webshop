@@ -1,23 +1,97 @@
 
 <div class="__main-toolbar">
-  <form class="form-inline d-flex md-form form-sm mt-0 __searchbar">
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Rechercher"
-        aria-label="Rechercher">
-        <button class="__searchbar-button"><mat-icon>search</mat-icon></button>
-      </form>
+  <!-- <mat-form-field color="legacy">
+      <input 
+      matInput
+      type="text"
+        name="title"
+        [(ngModel)]="title"
+        placeholder="Rechercher un produit"
+        
+        >
+        <button
+        mat-icon-button
+        matSuffix
+        (click)="searchTitle()"
+        >
+          <mat-icon>search</mat-icon>      
+        </button>
+  </mat-form-field> -->
+  <form >
+    <input 
+    id="typeahead-basic" 
+    name="title"
+    type="text" 
+    class="form-control" 
+    placeholder="Rechercher un produit"
+    [(ngModel)]="title" 
+    [ngbTypeahead]="search"
+    (keyup.enter)="searchTitle($event.target.value)"
+    />
+  </form>
+      
   <span class="__spacer"></span>
   <button mat-flat-button 
-  class="__main-toolbar-button bg-success" ><mat-icon>add</mat-icon>Ajouter</button>
+  class="__main-toolbar-button bg-success" 
+  (click)="toAdding()"
+  ><mat-icon>add</mat-icon>Ajouter</button>
+
   <button mat-flat-button 
-  class="__main-toolbar-button bg-indigo"><mat-icon>filter_list</mat-icon><span></span> Trier</button>
+  class="__main-toolbar-button bg-indigo"
+  ><mat-icon>filter_list</mat-icon><span></span> Trier</button>
 
 </div>
 <div class="__product-list">
   <ul class="list-group">
     <li
-    class="list-group-item"
-    
+    class="list-group-item __disp-horizontal"
+    *ngFor="let product of products; let i= index"
+    [class.active]="i==currentIndex"
+    (click)="setActiveProduct(product,i)"
     >
+      {{product.title}}
+      <div class="__disp-horizontal">
+        <div *ngIf="product.stock > 0 && product.stock < 10" class="badge badge-warning __pos-end">
+          Stock : {{product.stock}}
+        </div>
+        <div *ngIf="product.stock >= 10" class="badge badge-success __pos-end">
+          Stock : {{product.stock | number }}
+        </div>
+        <div *ngIf="product.stock === 0 || !product.stock" class="badge badge-danger __pos-end">
+          Stock : {{product.stock ? product.stock : "0"}}
+        </div>
+        <a 
+        class="badge badge-secondary __pos-end" 
+        routerLink="{{product.id}}">
+          Editer
+        </a>
+      </div>
     </li>
   </ul>
+</div>
+<div class="col-md-6">
+  <div *ngIf="currentProduct">
+    <h4>Product</h4>
+    <div>
+      <label><strong>Title:</strong></label> {{ currentProduct.title }}
+    </div>
+    <div>
+      <label><strong>Description:</strong></label>
+      {{ currentProduct.description }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentProduct.available ? "Disponible" : "Rupture" }}
+    </div>
+
+    <!-- ici le routerLink="[{{ currentProduct.id }}] va rediriger vers produits/:id -->
+    <a class="badge badge-info" routerLink="{{currentProduct.id}}">
+      Edit {{ currentProduct.id }}
+    </a>
+  </div>
+
+  <div *ngIf="!currentProduct">
+    <br />
+    <p>Please click on a Product...</p>
+  </div>
 </div>

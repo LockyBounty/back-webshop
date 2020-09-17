@@ -1,1 +1,65 @@
-<p>product-adding works!</p>
+
+<div style="width: 400px; margin: auto;">
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+            <label for="title">Intitulé du produit :</label>
+            <small>(max 20 caractères)</small>
+            <input
+                type="text"
+                maxlength="20"
+                class="form-control"
+                id="title"
+                required
+                [(ngModel)]="product.title"
+                name="title"
+            />
+        </div>
+
+        <div class="form-group">
+            <label for="photo">Photo :</label>
+            <input
+                type="text"
+                class="form-control"
+                id="photo"
+                required
+                [(ngModel)]="product.photo"
+                name="photo"
+            />
+        </div>
+    
+        <div class="form-group">
+            <label for="description">Description : </label>
+            
+            <textarea
+                type="text"
+                id="description"
+                required
+                class="__custom-ta"
+                rows="5" cols="40%"
+                [(ngModel)]="product.description"
+                name="description">
+            </textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Prix : </label>
+            <input
+                type="number"
+                class="form-control"
+                id="price"
+                required
+                [(ngModel)]="product.price"
+                name="price"
+            />
+        </div>
+    
+            <button (click)="saveProduct()" class="btn btn-success">Soumettre</button>
+        </div>
+    
+        <div *ngIf="submitted">
+            <h4>Le produit a bien été ajouté !</h4>
+            <button class="btn btn-success" (click)="newProduct()">Ajouter</button>
+        </div>
+        </div>
+</div>

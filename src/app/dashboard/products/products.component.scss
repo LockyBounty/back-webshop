@@ -17,12 +17,12 @@ $indigo : #3E50B4;
 
 
 
-
 .__main-toolbar{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0 1vw 0 1vw; 
+    // margin: 0 1vw 0 1vw; 
+    padding: 0 1vw 0 1vw; 
     height: 80px;
     
     .__main-toolbar-button{
@@ -56,4 +56,19 @@ $indigo : #3E50B4;
     .__spacer{
         flex: 1 1 auto;
     }
+
+    
+}
+
+.__pos-end{
+    display: flex;
+    margin: 0 0 0 1vw ;
+    justify-content: center;
+    align-items: center;
+    // align-self: flex-end;
+}
+.__disp-horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

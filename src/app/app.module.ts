@@ -7,7 +7,10 @@ import { SidebarModule } from 'ng-sidebar';
 //special connection
 import {HttpClientModule} from '@angular/common/http';
 import {authInterceptorProviders} from './_helpers/auth.interceptor';
-//
+
+//services
+import { AuthGuardService } from './services/auth-guard.service';
+
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -44,10 +47,11 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuardService } from './services/auth-guard.service';
+
 import { ProductDetailsComponent } from './dashboard/products/product-details/product-details.component';
 import { ProductAddingComponent } from './dashboard/products/product-adding/product-adding.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const appRoutes : Routes = [
@@ -67,14 +71,10 @@ const appRoutes : Routes = [
         pathMatch: 'full' 
       },
       {path: "overview", component: OverviewComponent},
-      {
-        path: "products", 
-        component: ProductsComponent,
-        children: [
-          {path:"product-details", component: ProductDetailsComponent},
-          {path:"product-adding", component: ProductAddingComponent}
-        ]
-      },
+      {path: "products", component: ProductsComponent},
+      {path: "products/:id", component: ProductDetailsComponent},
+      {path: "product-adding", component: ProductAddingComponent},
+
       {path: "orders", component: OrdersComponent},
       {path: "users", component: UsersComponent},
       {path: "profile", component: ProfileComponent},
@@ -151,6 +151,8 @@ const appRoutes : Routes = [
     MatListModule,
 
     HttpClientModule,
+
+    NgbModule,
   
   ],
   exports:[RouterModule],

@@ -1,1 +1,91 @@
-<p>product-details works!</p>
+<div style="width: 400px; margin: auto;">
+    <div *ngIf="currentProduct" class="__edit-form">
+        <h4>{{currentProduct.title}}</h4>
+        <form>
+            <div class="form-group">
+            <label for="title">Intitulé du produit :</label>
+            <input
+            type="text"
+            maxlength="20"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentProduct.title"
+            name="title"
+            />
+            <small>(max 20 caractères)</small>
+            </div>
+            <div class="form-group">
+            <label for="description">Description :</label>
+            <br>
+            <textarea
+                type="text"
+                id="description"
+                class="__custom-ta"
+                rows="5" cols="40"
+                [(ngModel)]="currentProduct.description"
+                name="description">
+            </textarea>
+            </div>
+
+            <div class="form-group">
+            <label for="price">Stock (unitaire) :</label>
+            <input
+                type="number"
+                class="form-control"
+                id="stock"
+                [(ngModel)]="currentProduct.stock"
+                name="stock"
+            />
+            </div>
+
+            <div class="form-group">
+            <label for="price">Prix (en euro) :</label>
+            <input
+                type="number"
+                class="form-control"
+                id="price"
+                [(ngModel)]="currentProduct.price"
+                name="price"
+            />
+            </div>
+    
+            <div class="form-group">
+            <label><strong>Statut :</strong></label>
+            {{ currentProduct.available ? "En stock" : "Rupture" }}
+            </div>
+        </form>
+    
+        <button
+            class="badge badge-primary mr-2"
+            *ngIf="currentProduct.available"
+            (click)="updateAvailable(false)"
+        >
+            Mettre en rupture
+        </button>
+        <button
+            *ngIf="!currentProduct.available"
+            class="badge badge-primary mr-2"
+            (click)="updateAvailable(true)"
+        >
+            Mettre en disponible
+        </button>
+    
+        <button class="badge badge-danger mr-2" (click)="deleteProduct()">
+            Supprimer le produit
+        </button>
+    
+        <button
+            type="submit"
+            class="badge badge-success"
+            (click)="updateProduct()"
+        >
+            Mettre à jour
+        </button>
+        <p>{{ message }}</p>
+        </div>
+    
+        <div *ngIf="!currentProduct">
+        <br />
+        <p>Ne peut accéder au produit...</p>
+    </div>
+</div>

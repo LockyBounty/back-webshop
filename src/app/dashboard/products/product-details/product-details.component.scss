@@ -1,0 +1,17 @@
+.__edit-form {
+    h4{
+        padding: 4vh 0;
+    }
+    .__custom-ta{
+        border-radius: 5px;
+        border-color: turquoise;
+        // text-indent: 1vw;
+        padding: 2vh 1vw;
+        color: darkslategray;
+        &:focus{
+            outline: none !important;
+            box-shadow: 0 0 10px #719ECE;
+            border-color: dodgerblue;
+        }
+    }
+}
