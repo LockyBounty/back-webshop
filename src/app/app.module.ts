@@ -53,6 +53,7 @@ import { ProductAddingComponent } from './dashboard/products/product-adding/prod
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const appRoutes : Routes = [
   {
@@ -153,6 +154,7 @@ const appRoutes : Routes = [
     HttpClientModule,
 
     NgbModule,
+    NgxPaginationModule
   
   ],
   exports:[RouterModule],

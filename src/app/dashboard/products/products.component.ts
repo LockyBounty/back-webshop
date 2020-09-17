@@ -24,6 +24,11 @@ export class ProductsComponent implements OnInit {
 
   public model: any;
 
+  page = 1;
+  count = 0;
+  pageSize = 8;
+  // pageSizes = [5,10]
+
 
   search = (text$: Observable<string>) =>
   text$.pipe(
@@ -46,8 +51,25 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['dashboard', 'product-adding'])
   }
 
+
+  getRequestParams(searchTitle, page, pageSize): any {
+    // tslint:disable-next-line:prefer-const
+    let params = {};
+    if (searchTitle) {
+      params[`title`] = searchTitle;
+    }
+    if (page) {
+      params[`page`] = page - 1;
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    return params;
+  }
+
   getAll():void{
-    this.productsService.getAll().subscribe(
+    const params = this.getRequestParams(this.title, this.page, this.pageSize)
+    this.productsService.getAll(params).subscribe(
       data=>{
         this.products = data;
         this.productsList = data.map(x=> x = x.title)
@@ -58,6 +80,17 @@ export class ProductsComponent implements OnInit {
         console.log(error)
       }
     )
+  }
+
+  handlePageChange(event): void {
+    this.page = event;
+    this.getAll();
+  }
+
+  handlePageSizeChange(event): void {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.getAll();
   }
 
   refreshAll():void{

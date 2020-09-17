@@ -45,7 +45,11 @@
   <ul class="list-group">
     <li
     class="list-group-item __disp-horizontal"
-    *ngFor="let product of products; let i= index"
+    *ngFor="let product of products | paginate : {
+      itemsPerPage: pageSize,
+      currentPage: page,
+      totalItems : count
+    }; let i= index"
     [class.active]="i==currentIndex"
     (click)="setActiveProduct(product,i)"
     >
@@ -69,7 +73,21 @@
     </li>
   </ul>
 </div>
-<div class="col-md-6">
+
+<!-- pagination -->
+<div class="col-md-12 __pagination">
+  <pagination-controls
+    class="__inside-pagination"
+    previousLabel="Préc."
+    nextLabel="Suiv."
+    responsive="true"
+    (pageChange)="handlePageChange($event)"
+  >
+  </pagination-controls>
+</div>
+  <!-- pagination fin-->
+
+<!-- <div class="col-md-6">
   <div *ngIf="currentProduct">
     <h4>Product</h4>
     <div>
@@ -82,10 +100,10 @@
     <div>
       <label><strong>Status:</strong></label>
       {{ currentProduct.available ? "Disponible" : "Rupture" }}
-    </div>
+    </div> -->
 
     <!-- ici le routerLink="[{{ currentProduct.id }}] va rediriger vers produits/:id -->
-    <a class="badge badge-info" routerLink="{{currentProduct.id}}">
+    <!-- <a class="badge badge-info" routerLink="{{currentProduct.id}}">
       Edit {{ currentProduct.id }}
     </a>
   </div>
@@ -94,4 +112,4 @@
     <br />
     <p>Please click on a Product...</p>
   </div>
-</div>
+</div> -->

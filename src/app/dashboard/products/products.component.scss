@@ -72,3 +72,15 @@ $indigo : #3E50B4;
     flex-direction: row;
     justify-content: space-between;
 }
+.__pagination{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh 0;
+}
+.__inside-pagination{
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
